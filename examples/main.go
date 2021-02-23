@@ -28,7 +28,7 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	// Draw map using the same example as
+	// Draw map using the same method as the official tiles example
 	// https://ebiten.org/examples/tiles.html
 
 	// Get the Tiles image width and height and divide by the Tile size to get the number of
@@ -42,7 +42,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 			op := &ebiten.DrawImageOptions{}
 
 			op.GeoM.Translate(float64((i%g.myMap.MapWidth)*g.myMap.TileWidth), float64((i/g.myMap.MapHeight)*g.myMap.TileHeight))
-			// Transform from 1D slice to 2 coordinates
+
+			// Transform from 1 dimensional slice to 2 coordinates (x, y) where the tile start
 			sx := ((t % tileWidth) - 1) * g.myMap.TileWidth
 			sy := (t / tileWidth) * g.myMap.TileHeight
 
