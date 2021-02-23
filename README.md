@@ -21,11 +21,42 @@ type EbitenMap struct {
 ## Quick Start
 
 ```go
-// TODO
+
+// Load the tiles image
+tiles, _, err := ebitenutil.NewImageFromFile("overworld.png")
+if err != nil {
+	fmt.Println(err)
+	os.Exit(2)
+}
+
+// Load the information of the tmx file
+myMap, err := ebitmx.GetEbitenMap("map.tmx")
+if err != nil {
+	fmt.Println(err)
+	os.Exit(2)
+}
+
+// Ready to draw! Check the examples for more info
+
 ```
 
+## Examples
+
+Check the example code in the [examples](./examples) folder.
+
+Run it by
+```
+$ cd examples
+$ go run main.go
+```
+
+A super simple map with 2 layers should load:
+
+![alt text](./examples/result.png "Example")
+
+
 ## Roadmap
-* Tilesets
+* Tilesets (support for `.tsx` files)
 * Orientation
 * Renderorder
 * Infinite maps
