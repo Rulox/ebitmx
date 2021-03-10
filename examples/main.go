@@ -69,7 +69,13 @@ func main() {
 		os.Exit(2)
 	}
 
-	myMap, err := ebitmx.GetEbitenMap("map.tmx")
+	myMapFromEmbedded, err := ebitmx.GetEbitenMapFromFS(embeddedFS, "map.tmx")
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(2)
+	}
+
+	_, err = ebitmx.GetEbitenMap("map.tmx")
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(2)
@@ -77,7 +83,7 @@ func main() {
 
 	game := &Game{
 		tiles: tiles,
-		myMap: myMap,
+		myMap: myMapFromEmbedded,
 	}
 
 	if err := ebiten.RunGame(game); err != nil {

@@ -2,6 +2,7 @@ package ebitmx
 
 import (
 	"fmt"
+	"io/fs"
 	"io/ioutil"
 	"os"
 	"strconv"
@@ -12,7 +13,14 @@ import (
 // based on a TMX file. Note that some data might be lost, as Ebiten
 // does not require too much information to render a map
 func GetEbitenMap(path string) (*EbitenMap, error) {
-	tmxFile, err := os.Open(path)
+	return GetEbitenMapFromFS(os.DirFS("."), path)
+}
+
+// GetEbitenMapFromFS allows you to pass in the file system used to find the desired file
+// This is useful for Go's v1.16 embed package which makes it simple to embed assets into
+// your binary and accessible via the embed.FS which is compatible with the fs.FS interface
+func GetEbitenMapFromFS(fileSystem fs.FS, path string) (*EbitenMap, error) {
+	tmxFile, err := fileSystem.Open(path)
 
 	if err != nil {
 		return nil, fmt.Errorf("Error opening TMX file %s: %v", path, err)
