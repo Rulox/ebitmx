@@ -12,6 +12,7 @@ type Tileset struct {
 	TileCount  int      `xml:"tilecount,attr"`
 	Columns    int      `xml:"columns,attr"`
 	Image      Image    `xml:"image"`
+	Tiles      []Tile   `xml:"tile"`
 }
 
 type Image struct {
@@ -20,6 +21,25 @@ type Image struct {
 	Source  string   `xml:"source"`
 	Width   int      `xml:"width,attr"`
 	Height  int      `xml:"height,attr"`
+}
+
+type Tile struct {
+	XMLName    xml.Name   `xml:"tile"`
+	Id         int        `xml:"id,attr"`
+	Type       string     `xml:"type,attr"`
+	Properties Properties `xml:"properties"`
+}
+
+type Properties struct {
+	XMLName    xml.Name   `xml:"properties"`
+	Properties []Property `xml:"property"`
+}
+
+type Property struct {
+	XMLName xml.Name `xml:"property"`
+	Name    string   `xml:"name,attr"`
+	Type    string   `xml:"type,attr"`
+	Value   string   `xml:"value,attr"`
 }
 
 // Map is the representation of a map in a TMX file
@@ -65,4 +85,12 @@ type EbitenMap struct {
 	MapHeight  int
 	MapWidth   int
 	Layers     [][]int
+}
+
+// EbitenTileset is a friendly representation of a TSX Tileset
+type EbitenTileset struct {
+	TileWidth  int
+	TileHeight int
+	TileCount  int
+	Tiles      []Tile
 }
