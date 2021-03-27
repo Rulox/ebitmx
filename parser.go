@@ -5,6 +5,8 @@ import (
 	"fmt"
 )
 
+// ParseTSX parses a TSX file and returns a Tileset
+// For now, we only allow XML format
 func ParseTSX(bytes []byte) (*Tileset, error) {
 	tsxMap := &Tileset{}
 	err := xml.Unmarshal(bytes, tsxMap)
