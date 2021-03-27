@@ -23,19 +23,19 @@ func GetEbitenMapFromFS(fileSystem fs.FS, path string) (*EbitenMap, error) {
 	tmxFile, err := fileSystem.Open(path)
 
 	if err != nil {
-		return nil, fmt.Errorf("Error opening TMX file %s: %v", path, err)
+		return nil, fmt.Errorf("error opening TMX file %s: %v", path, err)
 	}
 
 	defer tmxFile.Close()
 
 	bytes, err := ioutil.ReadAll(tmxFile)
 	if err != nil {
-		return nil, fmt.Errorf("Error reading TMX file %s: %v", path, err)
+		return nil, fmt.Errorf("error reading TMX file %s: %v", path, err)
 	}
 
 	tmxMap, err := ParseTMX(bytes)
 	if err != nil {
-		return nil, fmt.Errorf("Error parsing TMX file %s: %v", path, err)
+		return nil, fmt.Errorf("error parsing TMX file %s: %v", path, err)
 	}
 
 	return transformMapToEbitenMap(tmxMap)
@@ -59,7 +59,7 @@ func transformMapToEbitenMap(tmx *Map) (*EbitenMap, error) {
 				coord, err := strconv.Atoi(s)
 
 				if err != nil {
-					return nil, fmt.Errorf("Error parsing layer [%s] data, %v is not a number", layer.Name, s)
+					return nil, fmt.Errorf("error parsing layer [%s] data, %v is not a number", layer.Name, s)
 				}
 				innerLayer = append(innerLayer, coord)
 			}

@@ -18,18 +18,18 @@ func GetEbitenTileset(path string) (*EbitenTileset, error) {
 func GetTilesetFromFS(fileSystem fs.FS, path string) (*EbitenTileset, error) {
 	tsxFile, err := fileSystem.Open(path)
 	if err != nil {
-		return nil, fmt.Errorf("Error opening TSX file %s: %v", path, err)
+		return nil, fmt.Errorf("error opening TSX file %s: %v", path, err)
 	}
 	defer tsxFile.Close()
 
 	bytes, err := ioutil.ReadAll(tsxFile)
 	if err != nil {
-		return nil, fmt.Errorf("Error reading TSX file %s: %v", path, err)
+		return nil, fmt.Errorf("error reading TSX file %s: %v", path, err)
 	}
 
 	tsxTileset, err := ParseTSX(bytes)
 	if err != nil {
-		return nil, fmt.Errorf("Error parsing TSX file %s: %v", path, err)
+		return nil, fmt.Errorf("error parsing TSX file %s: %v", path, err)
 	}
 
 	return transformMapToEbitenTileset(tsxTileset)
