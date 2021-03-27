@@ -9,6 +9,16 @@ import (
 	"strings"
 )
 
+// EbitenMap is the transformed representation of a TMX map in the simplest
+// way possible for Ebiten to understand and render
+type EbitenMap struct {
+	TileWidth  int
+	TileHeight int
+	MapHeight  int
+	MapWidth   int
+	Layers     [][]int
+}
+
 // GetEbitenMap returns a map that Ebiten can understand
 // based on a TMX file. Note that some data might be lost, as Ebiten
 // does not require too much information to render a map

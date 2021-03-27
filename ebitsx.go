@@ -7,6 +7,14 @@ import (
 	"os"
 )
 
+// EbitenTileset is a friendly representation of a TSX Tileset
+type EbitenTileset struct {
+	TileWidth  int
+	TileHeight int
+	TileCount  int
+	Tiles      []Tile
+}
+
 // GetEbitenTileset returns a simplified TSX Tileset, based on a file on disk
 func GetEbitenTileset(path string) (*EbitenTileset, error) {
 	return GetTilesetFromFS(os.DirFS("."), path)

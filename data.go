@@ -76,21 +76,3 @@ type Data struct {
 	Encoding string   `xml:"encoding,attr"`
 	Raw      []byte   `xml:",innerxml"`
 }
-
-// EbitenMap is the transformed representation of a TMX map in the simplest
-// way possible for Ebiten to understand and render
-type EbitenMap struct {
-	TileWidth  int
-	TileHeight int
-	MapHeight  int
-	MapWidth   int
-	Layers     [][]int
-}
-
-// EbitenTileset is a friendly representation of a TSX Tileset
-type EbitenTileset struct {
-	TileWidth  int
-	TileHeight int
-	TileCount  int
-	Tiles      []Tile
-}
