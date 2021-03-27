@@ -11,6 +11,15 @@ type Tileset struct {
 	TileHeight int      `xml:"tileheight,attr"`
 	TileCount  int      `xml:"tilecount,attr"`
 	Columns    int      `xml:"columns,attr"`
+	Image      Image    `xml:"image"`
+}
+
+type Image struct {
+	XMLName xml.Name `xml:"image"`
+	Format  string   `xml:"format"`
+	Source  string   `xml:"source"`
+	Width   int      `xml:"width,attr"`
+	Height  int      `xml:"height,attr"`
 }
 
 // Map is the representation of a map in a TMX file
