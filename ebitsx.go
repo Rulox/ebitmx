@@ -4,22 +4,22 @@ import (
 	"fmt"
 	"io/fs"
 	"io/ioutil"
+	"os"
 )
 
-// GetEbitenMap returns a map that Ebiten can understand
-// based on a TMX file. Note that some data might be lost, as Ebiten
-// does not require too much information to render a map
-// func GetEbitenMap(path string) (*EbitenMap, error) {
-// 	return GetEbitenMapFromFS(os.DirFS("."), path)
-// }
+// GetEbitenTileset returns a simplified TSX Tileset, based on a file on disk
+func GetEbitenTileset(path string) (*EbitenTileset, error) {
+	return GetTilesetFromFS(os.DirFS("."), path)
+}
 
-// func GetTilesetFromFS(fileSystem fs.FS, path string) (*EbitenMap, error) {
-func GetTilesetFromFS(fileSystem fs.FS, path string) (*Tileset, error) {
+// GetTilesetFromFS allows you to pass in the file system used to find the desired file
+// This is useful for Go's v1.16 embed package which makes it simple to embed assets into
+// your binary and accessible via the embed.FS which is compatible with the fs.FS interface
+func GetTilesetFromFS(fileSystem fs.FS, path string) (*EbitenTileset, error) {
 	tsxFile, err := fileSystem.Open(path)
 	if err != nil {
 		return nil, fmt.Errorf("Error opening TSX file %s: %v", path, err)
 	}
-
 	defer tsxFile.Close()
 
 	bytes, err := ioutil.ReadAll(tsxFile)
@@ -32,38 +32,16 @@ func GetTilesetFromFS(fileSystem fs.FS, path string) (*Tileset, error) {
 		return nil, fmt.Errorf("Error parsing TSX file %s: %v", path, err)
 	}
 
-	return tsxTileset, nil
-
-	// return transformMapToEbitenMap(tmxMap)
+	return transformMapToEbitenTileset(tsxTileset)
 }
 
-// func transformMapToEbitenMap(tmx *Map) (*EbitenMap, error) {
-// 	ebitenMap := &EbitenMap{
-// 		TileWidth:  tmx.TilHeight,
-// 		TileHeight: tmx.TileWidth,
-// 		MapHeight:  tmx.Height,
-// 		MapWidth:   tmx.Width,
-// 	}
+func transformMapToEbitenTileset(tsx *Tileset) (*EbitenTileset, error) {
+	ebitenMap := &EbitenTileset{
+		TileWidth:  tsx.TileWidth,
+		TileHeight: tsx.TileHeight,
+		TileCount:  tsx.TileCount,
+		Tiles:      tsx.Tiles,
+	}
 
-// 	var ebitenLayers [][]int
-// 	for _, layer := range tmx.Layers {
-// 		var innerLayer []int
-// 		if layer.Data.Encoding == "csv" {
-
-// 			for _, s := range strings.Split(string(layer.Data.Raw), ",") {
-// 				s = strings.TrimSpace(s)
-// 				coord, err := strconv.Atoi(s)
-
-// 				if err != nil {
-// 					return nil, fmt.Errorf("Error parsing layer [%s] data, %v is not a number", layer.Name, s)
-// 				}
-// 				innerLayer = append(innerLayer, coord)
-// 			}
-
-// 		}
-// 		ebitenLayers = append(ebitenLayers, innerLayer)
-// 	}
-
-// 	ebitenMap.Layers = ebitenLayers
-// 	return ebitenMap, nil
-// }
+	return ebitenMap, nil
+}
