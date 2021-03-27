@@ -5,6 +5,23 @@ import (
 	"fmt"
 )
 
+func ParseTSX(bytes []byte) (*Tileset, error) {
+	tsxMap := &Tileset{}
+	err := xml.Unmarshal(bytes, tsxMap)
+	if err != nil {
+		return nil, fmt.Errorf("only <xml> format is allowed: %v", err)
+	}
+
+	// return tsxMap, nil
+
+	// err = checkLimitations(tmxMap)
+	// if err != nil {
+	// 	return nil, fmt.Errorf("unsupported: %v", err)
+	// }
+
+	return tsxMap, nil
+}
+
 // ParseTMX parses a TMX file and returns a Map
 // For now, we only allow XML format
 func ParseTMX(bytes []byte) (*Map, error) {

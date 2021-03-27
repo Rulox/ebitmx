@@ -2,10 +2,21 @@ package ebitmx
 
 import "encoding/xml"
 
+// Tileset represents a set of tiles in a TMX, or a TSX file
+type Tileset struct {
+	XMLName    xml.Name `xml:"tileset"`
+	Version    string   `xml:"version,attr"`
+	Name       string   `xml:"name,attr"`
+	TileWidth  int      `xml:"tilewidth,attr"`
+	TileHeight int      `xml:"tileheight,attr"`
+	TileCount  int      `xml:"tilecount,attr"`
+	Columns    int      `xml:"columns,attr"`
+}
+
 // Map is the representation of a map in a TMX file
 type Map struct {
 	XMLName      xml.Name `xml:"map"`
-	Version      string   `xml:"version, attr"`
+	Version      string   `xml:"version,attr"`
 	TiledVersion string   `xml:"tiledversion,attr"`
 	Orientation  string   `xml:"orientation,attr"`
 	RenderOrder  string   `xml:"renderorder,attr"`
@@ -19,8 +30,6 @@ type Map struct {
 	//Tileset []Tileset `xml:"tileset"`
 	Layers []Layer `xml:"layer"`
 }
-
-//type Tileset struct{}
 
 // Layer represents a layer in the TMX map file
 type Layer struct {
