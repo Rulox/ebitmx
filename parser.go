@@ -12,13 +12,6 @@ func ParseTSX(bytes []byte) (*Tileset, error) {
 		return nil, fmt.Errorf("only <xml> format is allowed: %v", err)
 	}
 
-	// return tsxMap, nil
-
-	// err = checkLimitations(tmxMap)
-	// if err != nil {
-	// 	return nil, fmt.Errorf("unsupported: %v", err)
-	// }
-
 	return tsxMap, nil
 }
 
