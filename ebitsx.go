@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/fs"
 	"io/ioutil"
+	"math"
 	"os"
 )
 
@@ -11,7 +12,8 @@ import (
 type EbitenTileset struct {
 	TileWidth  int
 	TileHeight int
-	TileCount  int
+	SetWidth   int
+	SetHeight  int
 	Tiles      []Tile
 }
 
@@ -47,7 +49,8 @@ func transformMapToEbitenTileset(tsx *Tileset) (*EbitenTileset, error) {
 	ebitenMap := &EbitenTileset{
 		TileWidth:  tsx.TileWidth,
 		TileHeight: tsx.TileHeight,
-		TileCount:  tsx.TileCount,
+		SetWidth:   tsx.Columns,
+		SetHeight:  int(math.Ceil(float64(tsx.TileCount) / float64(tsx.Columns))),
 		Tiles:      tsx.Tiles,
 	}
 
