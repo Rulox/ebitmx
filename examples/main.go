@@ -51,20 +51,15 @@ func (g *Game) Update() error {
 	// .tsx file), so their position in g.tileset.Tiles[] isn't directly related to their id.
 	// As such, we have to iterate over the list each time and find the tile we're looking
 	// for. This could be improved by caching with a map of ids to *Tiles.
-	found := false
 	for _, t := range g.tileset.Tiles {
 		if t.Id+1 == id {
 			g.currentTileType = t.Type
-			found = true
-			break
+			return nil
 		}
 	}
 
 	// We've come across a tile that asn't explicitly stored in the .tsx
-	if !found {
-		g.currentTileType = "implicit tile - not in .tsx file"
-	}
-
+	g.currentTileType = "implicit tile - not in .tsx file"
 	return nil
 }
 
