@@ -2,9 +2,7 @@
 
 Ebitmx is a super simple parser to help [render](https://doc.mapeditor.org/en/latest/reference/tmx-map-format/) TMX maps when using [Ebiten](https://github.com/hajimehoshi/ebiten) for your games.
 
-Right now is super limited to XML and CSV data structures in the TMX file, with support only for `orthogonal`, `right-down`, non `infinite` maps.
-
-Please do **not** use this library in a production environment, this is just done as an example/helper to people who want to use TMX maps with Ebiten. And it's being used in the creation of a game. However, feel free to open a ticket to request a feature or send a PR.
+Please do **not** use this library in a production environment, this is under heavy development and there will be breaking changes.
 
 This library parses a TMX file and returns a struct like the following, with the basic fields for you to render your map inside the `Draw()` function of the Ebiten main loop.
 
@@ -55,9 +53,11 @@ A super simple map with 2 layers should load:
 ![alt text](./examples/result.png "Example")
 
 
-## Roadmap
-* Tilesets (support for `.tsx` files)
-* Orientation
+## Roadmap (not in order)
+* Getters for simplicity
+* Improve docs and tests
+* Collision maps
+* Out of the box "Draw()" method for simplicity (if you don't want to think, just call Draw from your code, passing ebiten "screen")
 * Renderorder
 * Infinite maps
 
