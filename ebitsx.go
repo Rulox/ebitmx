@@ -10,11 +10,11 @@ import (
 
 // EbitenTileset is a friendly representation of a TSX Tileset
 type EbitenTileset struct {
-	TileWidth  int
-	TileHeight int
-	SetWidth   int
-	SetHeight  int
-	Tiles      []Tile
+	TileWidth     int
+	TileHeight    int
+	TilesetWidth  int
+	TilesetHeight int
+	Tiles         []Tile
 }
 
 // GetEbitenTileset returns a simplified TSX Tileset, based on a file on disk
@@ -47,11 +47,11 @@ func GetTilesetFromFS(fileSystem fs.FS, path string) (*EbitenTileset, error) {
 
 func transformMapToEbitenTileset(tsx *Tileset) (*EbitenTileset, error) {
 	ebitenMap := &EbitenTileset{
-		TileWidth:  tsx.TileWidth,
-		TileHeight: tsx.TileHeight,
-		SetWidth:   tsx.Columns,
-		SetHeight:  int(math.Ceil(float64(tsx.TileCount) / float64(tsx.Columns))),
-		Tiles:      tsx.Tiles,
+		TileWidth:     tsx.TileWidth,
+		TileHeight:    tsx.TileHeight,
+		TilesetWidth:  tsx.Columns,
+		TilesetHeight: int(math.Ceil(float64(tsx.TileCount) / float64(tsx.Columns))),
+		Tiles:         tsx.Tiles,
 	}
 
 	return ebitenMap, nil
