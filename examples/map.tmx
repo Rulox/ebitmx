@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="1">
- <tileset firstgid="1" source="Test.tsx"/>
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="1">
+ <tileset firstgid="1" source="tileset.tsx"/>
  <layer id="1" name="Tile Layer 1" width="10" height="10">
   <data encoding="csv">
 71,71,71,71,71,71,71,71,71,71,
@@ -11,7 +11,7 @@
 71,71,71,43,44,45,71,71,71,71,
 71,71,71,71,71,71,6,7,8,71,
 71,71,71,71,71,71,27,28,29,71,
-71,71,71,71,71,71,48,49,50,71,
+71,0,71,71,71,71,48,49,50,71,
 71,71,71,71,71,71,71,71,71,71
 </data>
  </layer>
@@ -25,7 +25,7 @@
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,99,0,0,
-0,0,0,0,0,0,0,0,0,0,
+0,71,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
